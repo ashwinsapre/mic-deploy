@@ -10,7 +10,7 @@ from caption import *
 app = Flask(__name__)
 
 device = "cpu"
-url="https://drive.google.com/file/d/1---vD9czhFbkX2fjBdL4mpMevRRkThR_/view?usp=sharing"
+url="https://drive.google.com/uc?id=1---vD9czhFbkX2fjBdL4mpMevRRkThR_&export=download"
 output="model.pth.tar"
 gdown.download(url, output, quiet=False)
 md5 = 'fa837a88f0c40c513d975104edf3da17'
