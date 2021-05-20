@@ -14,7 +14,7 @@ url="https://drive.google.com/uc?id=1---vD9czhFbkX2fjBdL4mpMevRRkThR_&export=dow
 output="model.pth.tar"
 gdown.download(url, output, quiet=False)
 md5 = '251e16d46507539f68b64dc084500eda'
-gdown.cached_download(url, output, md5=md5, postprocess=gdown.extractall)
+gdown.cached_download(url, output, md5=md5)
 
 checkpoint = torch.load('model.pth.tar', map_location=str(device))
 decoder = checkpoint['decoder']
