@@ -13,7 +13,7 @@ device = "cpu"
 url="https://drive.google.com/uc?id=1---vD9czhFbkX2fjBdL4mpMevRRkThR_&export=download"
 output="model.pth.tar"
 gdown.download(url, output, quiet=False)
-md5 = 'fa837a88f0c40c513d975104edf3da17'
+md5 = '251e16d46507539f68b64dc084500eda'
 gdown.cached_download(url, output, md5=md5, postprocess=gdown.extractall)
 
 checkpoint = torch.load('model.pth.tar', map_location=str(device))
