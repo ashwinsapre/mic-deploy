@@ -9,7 +9,7 @@ from caption import *
 
 app = Flask(__name__)
 
-device = "cpu"
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 url="https://drive.google.com/uc?id=1---vD9czhFbkX2fjBdL4mpMevRRkThR_&export=download"
 output="model.pth.tar"
 gdown.download(url, output, quiet=False)
@@ -29,12 +29,12 @@ rev_word_map = {v: k for k, v in word_map.items()}
 
 @app.route('/', methods=['POST'])
 def predict():
-    #file = request.files['file']
-    #beam_size=3
-    #seq, alphas = caption_image_beam_search(encoder, decoder, file, word_map, beam_size)
-    #words = [rev_word_map[ind] for ind in seq]
-    #return jsonify({'caption': words})
-    return {'success':2}
+    file = request.files['file']
+    beam_size=3
+    seq, alphas = caption_image_beam_search(encoder, decoder, file, word_map, beam_size)
+    words = [rev_word_map[ind] for ind in seq]
+    return jsonify({'caption': words})
+    #return {'success':2}
 
 
 if __name__ == '__main__':
