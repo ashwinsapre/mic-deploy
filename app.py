@@ -22,12 +22,12 @@ rev_word_map = {v: k for k, v in word_map.items()}
 
 @app.route('/', methods=['POST'])
 def predict():
-    file = request.files['file']
-    beam_size=3
-    seq, alphas = caption_image_beam_search(encoder, decoder, file, word_map, beam_size)
-    words = [rev_word_map[ind] for ind in seq]
-    return jsonify({'caption': words})
-    #return {'success':2}
+    #file = request.files['file']
+    #beam_size=3
+    #seq, alphas = caption_image_beam_search(encoder, decoder, file, word_map, beam_size)
+    #words = [rev_word_map[ind] for ind in seq]
+    #return jsonify({'caption': words})
+    return {'success':2}
 
 
 if __name__ == '__main__':
