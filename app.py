@@ -9,16 +9,16 @@ from caption import *
 app = Flask(__name__)
 
 device = "cpu"
-checkpoint = torch.load('BEST_checkpoint_IU-XRAY.pth.tar', map_location=str(device))
-decoder = checkpoint['decoder']
-decoder = decoder.to(device)
-decoder.eval()
-encoder = checkpoint['encoder']
-encoder = encoder.to(device)
-encoder.eval()
-with open('wordmap.json', 'r') as j:
-    word_map = json.load(j)
-rev_word_map = {v: k for k, v in word_map.items()}
+#checkpoint = torch.load('BEST_checkpoint_IU-XRAY.pth.tar', map_location=str(device))
+#decoder = checkpoint['decoder']
+#decoder = decoder.to(device)
+#decoder.eval()
+#encoder = checkpoint['encoder']
+#encoder = encoder.to(device)
+#encoder.eval()
+#with open('wordmap.json', 'r') as j:
+#    word_map = json.load(j)
+#rev_word_map = {v: k for k, v in word_map.items()}
 
 @app.route('/', methods=['POST'])
 def predict():
