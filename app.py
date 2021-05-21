@@ -37,8 +37,15 @@ def predict():
     beam_size=3
     seq, alphas = caption_image_beam_search(encoder, decoder, file, word_map, beam_size)
     words = [rev_word_map[ind] for ind in seq]
-    return jsonify({'error':0, 'caption': words})
+    words.pop(0)
+    words.pop()
+    for n, i in enumerate(words):
+    	if i == '<stop>':
+    		words[n] = '.'
+    temp=str(words[0]).capitalize()
+    words[0]=temp
 
+    return jsonify({'error':0, 'caption': words})
 
 if __name__ == '__main__':
     app.run()
