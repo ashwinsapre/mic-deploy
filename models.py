@@ -7,7 +7,7 @@ from generate_new_weights import new_chexnet
 import gdown
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-path='https://drive.google.com/uc?id=1--cw_yituJFhi_WISwTqew6emmeFe8tB&export=download'
+url='https://drive.google.com/uc?id=1--cw_yituJFhi_WISwTqew6emmeFe8tB&export=download'
 output="CheXNet-122030-16052021.pth.tar"
 gdown.download(url, output, quiet=False)
 md5 = '251e16d46507539f68b64dc084500eda'
