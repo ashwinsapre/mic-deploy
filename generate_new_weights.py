@@ -25,3 +25,6 @@ class new_chexnet(nn.Module):
   def forward(self, inp):
     op = self.densenet(inp)
     return op
+
+if __name__ == '__main__':
+    main()

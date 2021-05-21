@@ -3,8 +3,6 @@ import torch.nn.functional as F
 import numpy as np
 import json
 import torchvision.transforms as transforms
-import matplotlib.pyplot as plt
-import matplotlib.cm as cm
 import skimage.transform
 import torchvision.transforms as transforms
 import argparse
@@ -36,8 +34,6 @@ def caption_image_beam_search(encoder, decoder, image_path, word_map, beam_size=
     # image = torch.autograd.Variable(image.view(-1, num_channels, height, width).cuda())
 
     i_sample = transforms.ToPILImage()(image)
-    plt.imshow(i_sample)
-    plt.savefig('image_sample.png')
 
     # Encode
     image = image.unsqueeze(0)  # (1, 3, 256, 256)
