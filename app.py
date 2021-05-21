@@ -30,11 +30,14 @@ rev_word_map = {v: k for k, v in word_map.items()}
 @app.route('/', methods=['POST'])
 def predict():
     file = request.files['file']
+    #perform similarity check (calling a function from a separate .py file)
+    #if not an xray:
+    	#return jsonify({'error':1,'caption': 'The image is not an x-ray, please try again.'})
+    #else:
     beam_size=3
     seq, alphas = caption_image_beam_search(encoder, decoder, file, word_map, beam_size)
     words = [rev_word_map[ind] for ind in seq]
-    return jsonify({'caption': words})
-    #return {'success':2}
+    return jsonify({'error':0, 'caption': words})
 
 
 if __name__ == '__main__':
