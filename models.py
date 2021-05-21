@@ -10,7 +10,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 url='https://drive.google.com/uc?id=1--cw_yituJFhi_WISwTqew6emmeFe8tB&export=download'
 output="CheXNet-122030-16052021.pth.tar"
 gdown.download(url, output, quiet=False)
-md5 = '251e16d46507539f68b64dc084500eda'
+md5 = 'dd13ccbca027220f4c1c9f93e016e11a'
 gdown.cached_download(url, output, md5=md5)
 
 enc_checkpoint='CheXNet-122030-16052021.pth.tar'
