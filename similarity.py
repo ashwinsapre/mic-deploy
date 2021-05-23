@@ -3,13 +3,7 @@ from PIL import Image, ImageOps
 from sklearn.metrics.pairwise import cosine_similarity
 import gdown
 
-def similarity_check(sample_path):
-	url="https://drive.google.com/uc?id=1IhwcaL-JKxb4kCl_Lr151fjpWuIHn0Mv&export=download"
-	output="mean.npy"
-	gdown.download(url, output, quiet=False)
-	md5 = '99ce108cc8b6e95a10fde69f1394549d'
-	gdown.cached_download(url, output, md5=md5)
-	mean = np.load('mean.npy')
+def similarity_check(sample_path, mean):
 	sample = Image.open(sample_path).convert('RGB')
 	w = min(sample.size[0], sample.size[1])
 	sample = sample.resize((w, w))

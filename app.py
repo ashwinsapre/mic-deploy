@@ -37,7 +37,8 @@ rev_word_map = {v: k for k, v in word_map.items()}
 @app.route('/', methods=['POST'])
 def predict():
     file = request.files['file']
-    similarity_score = similarity_check(file)
+    mean = np.load('mean.npy')
+    similarity_score = similarity_check(file, mean)
     if similarity_score <= 0.85:
     	return jsonify({'error':1,'caption': 'The image is not an x-ray, please try again.'})
     else:
