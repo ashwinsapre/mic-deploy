@@ -6,6 +6,9 @@ import gdown
 from PIL import Image
 from flask import Flask, jsonify, request, render_template
 from caption import *
+import numpy as np
+from PIL import ImageOps
+from sklearn.metrics.pairwise import cosine_similarity
 
 app = Flask(__name__)
 
