@@ -17,7 +17,6 @@ gdown.download(url, output, quiet=False)
 md5 = '251e16d46507539f68b64dc084500eda'
 gdown.cached_download(url, output, md5=md5)
 
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 url="https://drive.google.com/uc?id=1IhwcaL-JKxb4kCl_Lr151fjpWuIHn0Mv&export=download"
 output="mean.npy"
 gdown.download(url, output, quiet=False)
