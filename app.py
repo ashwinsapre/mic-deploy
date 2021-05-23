@@ -17,6 +17,13 @@ gdown.download(url, output, quiet=False)
 md5 = '251e16d46507539f68b64dc084500eda'
 gdown.cached_download(url, output, md5=md5)
 
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+url="https://drive.google.com/uc?id=1IhwcaL-JKxb4kCl_Lr151fjpWuIHn0Mv&export=download"
+output="mean.npy"
+gdown.download(url, output, quiet=False)
+md5 = '251e16d46507539f68b64dc084500eda'
+gdown.cached_download(url, output, md5=md5)
+
 checkpoint = torch.load('model.pth.tar', map_location=str(device))
 decoder = checkpoint['decoder']
 decoder = decoder.to(device)
@@ -31,7 +38,6 @@ rev_word_map = {v: k for k, v in word_map.items()}
 @app.route('/', methods=['POST'])
 def predict():
     file = request.files['file']
-    #perform similarity check (calling a function from a separate .py file)
     similarity_score = similarity_check(file)
     if similarity_score <= 0.85:
     	return jsonify({'error':1,'caption': 'The image is not an x-ray, please try again.'})
