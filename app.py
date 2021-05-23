@@ -6,7 +6,6 @@ import gdown
 from PIL import Image
 from flask import Flask, jsonify, request, render_template
 from caption import *
-from similarity import *
 
 app = Flask(__name__)
 
@@ -31,8 +30,14 @@ rev_word_map = {v: k for k, v in word_map.items()}
 @app.route('/', methods=['POST'])
 def predict():
     file = request.files['file']
-    #similarity_score = similarity_check(file)
-    if False:
+    mean = np.load('mean.npy')
+    sample = Image.open(sample_path).convert('RGB')
+    w = min(sample.size[0], sample.size[1])
+    sample = sample.resize((w, w))
+    sample = np.array(sample).reshape(1, -1)
+    mean = np.resize(mean,(w, w, 3)).reshape(1, -1)
+    similarity_score = cosine_similarity(mean, sample)
+    if similarity_score <= 0.85:
     	return jsonify({'error':1,'caption': 'The image is not an x-ray, please try again.'})
     else:
         beam_size=3
