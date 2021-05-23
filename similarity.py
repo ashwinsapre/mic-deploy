@@ -1,9 +1,9 @@
 import numpy as np
 from PIL import Image, ImageOps
 from sklearn.metrics.pairwise import cosine_similarity
-import gdown
 
-def similarity_check(sample_path, mean):
+def similarity_check(sample_path):
+	mean = np.load('mean.npy')
 	sample = Image.open(sample_path).convert('RGB')
 	w = min(sample.size[0], sample.size[1])
 	sample = sample.resize((w, w))
