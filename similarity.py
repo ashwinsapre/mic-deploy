@@ -1,0 +1,15 @@
+import numpy as np
+from PIL import Image, ImageOps
+from sklearn.metrics.pairwise import cosine_similarity
+import cv2
+
+
+def similarity_check(sample):
+    mean = np.load('mean.npy')
+    # sample = Image.open('download.png').convert('RGB')
+    w = min(sample.size[0], sample.size[1])
+    sample = sample.resize((w, w))
+    sample = np.array(sample).reshape(1, -1)
+    mean = np.resize(mean,(w, w, 3)).reshape(1, -1)
+
+    return cosine_similarity(mean, sample)

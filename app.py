@@ -31,21 +31,22 @@ rev_word_map = {v: k for k, v in word_map.items()}
 def predict():
     file = request.files['file']
     #perform similarity check (calling a function from a separate .py file)
-    #if not an xray:
-    	#return jsonify({'error':1,'caption': 'The image is not an x-ray, please try again.'})
-    #else:
-    beam_size=3
-    seq, alphas = caption_image_beam_search(encoder, decoder, file, word_map, beam_size)
-    words = [rev_word_map[ind] for ind in seq]
-    words.pop(0)
-    words.pop()
-    for n, i in enumerate(words):
-    	if i == '<stop>':
-    		words[n] = '.'
-    temp=str(words[0]).capitalize()
-    words[0]=temp
+    similarity_score = similarity_check(file)
+    if similarity_score <= 0.85:
+    	return jsonify({'error':1,'caption': 'The image is not an x-ray, please try again.'})
+    else:
+        beam_size=3
+        seq, alphas = caption_image_beam_search(encoder, decoder, file, word_map, beam_size)
+        words = [rev_word_map[ind] for ind in seq]
+        words.pop(0)
+        words.pop()
+        for n, i in enumerate(words):
+            if i == '<stop>':
+                words[n] = '.'
+        temp=str(words[0]).capitalize()
+        words[0]=temp
 
-    return jsonify({'error':0, 'caption': words})
+        return jsonify({'error':0, 'caption': words})
 
 if __name__ == '__main__':
     app.run()
