@@ -4,9 +4,9 @@ from sklearn.metrics.pairwise import cosine_similarity
 import cv2
 
 
-def similarity_check(sample):
+def similarity_check(sample_path):
     mean = np.load('mean.npy')
-    # sample = Image.open('download.png').convert('RGB')
+    sample = Image.open(sample_path).convert('RGB')
     w = min(sample.size[0], sample.size[1])
     sample = sample.resize((w, w))
     sample = np.array(sample).reshape(1, -1)
