@@ -31,8 +31,8 @@ rev_word_map = {v: k for k, v in word_map.items()}
 @app.route('/', methods=['POST'])
 def predict():
     file = request.files['file']
-    similarity_score = similarity_check(file)
-    if similarity_score <= 0.85:
+    #similarity_score = similarity_check(file)
+    if False:
     	return jsonify({'error':1,'caption': 'The image is not an x-ray, please try again.'})
     else:
         beam_size=3
