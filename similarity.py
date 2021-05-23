@@ -1,6 +1,7 @@
 import numpy as np
 from PIL import Image, ImageOps
 from sklearn.metrics.pairwise import cosine_similarity
+import gdown
 
 def similarity_check(sample_path):
 	url="https://drive.google.com/uc?id=1IhwcaL-JKxb4kCl_Lr151fjpWuIHn0Mv&export=download"
