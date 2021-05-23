@@ -6,6 +6,7 @@ import gdown
 from PIL import Image
 from flask import Flask, jsonify, request, render_template
 from caption import *
+from similarity import *
 
 app = Flask(__name__)
 
