@@ -39,8 +39,8 @@ def predict():
     w = min(sample.size[0], sample.size[1])
     sample = sample.resize((w, w))
     sample = np.array(sample).reshape(1, -1)
-    mean = np.resize(mean,(w, w, 3)).reshape(1, -1)
-    similarity_score = cosine_similarity(mean, sample)
+    meanx = np.resize(mean,(w, w, 3)).reshape(1, -1)
+    similarity_score = cosine_similarity(meanx, sample)
     if similarity_score <= 0.85:
     	return jsonify({'error':1,'caption': 'The image is not an x-ray, please try again.'})
     else:
