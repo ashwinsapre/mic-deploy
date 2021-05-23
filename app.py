@@ -30,7 +30,7 @@ rev_word_map = {v: k for k, v in word_map.items()}
 @app.route('/', methods=['POST'])
 def predict():
     file = request.files['file']
-    mean = np.load('mean.npy')
+    sample_path = np.load('mean.npy')
     sample = Image.open(sample_path).convert('RGB')
     w = min(sample.size[0], sample.size[1])
     sample = sample.resize((w, w))
