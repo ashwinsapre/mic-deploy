@@ -30,10 +30,11 @@ with open('wordmap.json', 'r') as j:
     word_map = json.load(j)
 rev_word_map = {v: k for k, v in word_map.items()}
 
+mean = np.load('mean.npy')
+
 @app.route('/', methods=['POST'])
 def predict():
     file = request.files['file']
-    mean = np.load('mean.npy')
     sample = Image.open(file).convert('RGB')
     w = min(sample.size[0], sample.size[1])
     sample = sample.resize((w, w))
