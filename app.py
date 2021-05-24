@@ -45,9 +45,11 @@ def similarity_check(file):
 @app.route('/', methods=['POST'])
 def predict():
     file = request.files['file']
+
     if similarity_check(file):
         empty_list=[]
         return jsonify({'error':1,'caption': empty_list})
+
     else:
         beam_size=3
         seq, alphas = caption_image_beam_search(encoder, decoder, file, word_map, beam_size)
