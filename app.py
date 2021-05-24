@@ -41,8 +41,10 @@ def predict():
     sample = np.array(sample).reshape(1, -1)
     meanx = np.resize(mean,(w, w, 3)).reshape(1, -1)
     similarity_score = cosine_similarity(meanx, sample)
+    print(similarity_score)
     if similarity_score <= 0.85:
         empty_list=[]
+        print(jsonify({'error':1,'caption': empty_list}))
         return jsonify({'error':1,'caption': empty_list})
     else:
         beam_size=3
