@@ -41,10 +41,9 @@ def predict():
     sample = np.array(sample).reshape(1, -1)
     meanx = np.resize(mean,(w, w, 3)).reshape(1, -1)
     similarity_score = cosine_similarity(meanx, sample)
-    t=similarity_score.item(0)
-    if t <= 0.85:
+    if similarity_score <= 0.85:
         empty_list=[]
-        return jsonify({'error':1,'caption': empty_list, 'sim_score': t})
+        return jsonify({'error':1,'caption': empty_list})
     else:
         beam_size=3
         seq, alphas = caption_image_beam_search(encoder, decoder, file, word_map, beam_size)
@@ -57,7 +56,7 @@ def predict():
         temp=str(words[0]).capitalize()
         words[0]=temp
 
-        return jsonify({'error':0, 'caption': words, 'sim_score': t})
+        return jsonify({'error':0, 'caption': words})
 
 if __name__ == '__main__':
     app.run()
