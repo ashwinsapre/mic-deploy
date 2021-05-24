@@ -31,8 +31,6 @@ with open('wordmap.json', 'r') as j:
     word_map = json.load(j)
 rev_word_map = {v: k for k, v in word_map.items()}
 
-mean = np.load('mean.npy')
-
 def similarity_check(file):
     hash0 = imagehash.average_hash(Image.open('mean.png').convert('RGB')) 
     hash1 = imagehash.average_hash(Image.open(file).convert('RGB')) 
@@ -47,8 +45,7 @@ def predict():
     file = request.files['file']
 
     if similarity_check(file):
-        empty_list=[]
-        return jsonify({'error':1,'caption': empty_list})
+        return jsonify({'error':1,'caption': []})
 
     else:
         beam_size=3
