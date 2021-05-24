@@ -7,8 +7,9 @@ from PIL import Image
 from flask import Flask, jsonify, request, render_template
 from caption import *
 import numpy as np
-from PIL import ImageOps
-from sklearn.metrics.pairwise import cosine_similarity
+import imagehash
+
+cutoff = 25
 
 app = Flask(__name__)
 
@@ -32,16 +33,19 @@ rev_word_map = {v: k for k, v in word_map.items()}
 
 mean = np.load('mean.npy')
 
+def similarity_check(file):
+    hash0 = imagehash.average_hash(Image.open('mean.png').convert('RGB')) 
+    hash1 = imagehash.average_hash(Image.open(file).convert('RGB')) 
+
+    if ((hash0 - hash1) <= cutoff):
+        return False
+    else:
+        return True
+
 @app.route('/', methods=['POST'])
 def predict():
     file = request.files['file']
-    sample = Image.open(file).convert('RGB')
-    w = min(sample.size[0], sample.size[1])
-    sample = sample.resize((w, w))
-    sample = np.array(sample).reshape(1, -1)
-    meanx = np.resize(mean,(w, w, 3)).reshape(1, -1)
-    similarity_score = cosine_similarity(meanx, sample)
-    if similarity_score <= 0.85:
+    if similarity_check(file):
         empty_list=[]
         return jsonify({'error':1,'caption': empty_list})
     else:
